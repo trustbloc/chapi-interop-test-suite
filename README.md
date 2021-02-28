@@ -290,6 +290,8 @@ npm install
 npm test
 ```
 
+Note: current version of tests are running against [trustbloc local](https://github.com/trustbloc/sandbox) version only.
+
 ## Contributing
 
 You may contribute to this test suite by submitting pull requests here:
@@ -307,4 +309,4 @@ Portions of the work on this test suite have been funded by the United States De
 
 ## License
 
-[Apache 2](LICENSE) © Digital Bazaar
+[Apache 2](LICENSE) © Digital Bazaar, © SecureKey Technologies

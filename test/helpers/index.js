@@ -108,3 +108,21 @@ function _validateVerifierVendor(vendor) {
 
   return true;
 }
+
+api.getTestProfile = ({issuerVendor, verifierVendor}) => {
+  if (issuerVendor.meta.testProfile) {
+    return issuerVendor.meta.testProfile
+  }
+
+  if (verifierVendor.meta.testProfile) {
+    return verifierVendor.meta.testProfile
+  }
+
+  return {}
+}
+
+api.skip = ({issuerVendor, verifierVendor, scenario}) => {
+  let issuerSkips = testConf.skips[scenario][issuerVendor.meta.key]
+  let skip = issuerSkips ? issuerSkips[verifierVendor.meta.key] : undefined
+  return skip ? `[skipped test, reason: ${skip}]` : ''
+}
