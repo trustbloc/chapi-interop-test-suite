@@ -1,6 +1,6 @@
 'use strict';
 
-const {chapi, getVendors, getVendorTitle} = require('../helpers');
+const {chapi, getVendors, getVendorTitle, getTestProfile, skip} = require('../helpers');
 const path = require('path');
 const uuid = require('uuid-random');
 const vendors = require('../vendors');
@@ -10,7 +10,7 @@ const SCENARIO_KEY = path.parse(__filename).name;
 
 const {walletVendors, issuerVendors, verifierVendors} = getVendors({
   vendors,
-  scenarioKey: SCENARIO_KEY
+  scenarioKey: SCENARIO_KEY,
 });
 
 const BASE_CTX = {
@@ -22,7 +22,7 @@ const BASE_CTX = {
   email: '',
   walletVendor: '',
   issuerVendor: '',
-  verifierVendor: ''
+  verifierVendor: '',
 };
 
 walletVendors.forEach(walletVendor => {
@@ -32,22 +32,44 @@ walletVendors.forEach(walletVendor => {
       const VENDOR_TITLE = getVendorTitle({
         walletVendor,
         issuerVendor,
-        verifierVendor
+        verifierVendor,
       });
 
-      describe(`[${TITLE}] ${VENDOR_TITLE}`, () => {
+
+      const TEST_PROFILE = getTestProfile({
+        issuerVendor,
+        verifierVendor,
+      });
+
+      // intentionally disabled test due to interop issues
+      let skipTest = skip({
+        issuerVendor,
+        verifierVendor,
+        scenario: SCENARIO_KEY,
+      });
+
+      describe(`[${TITLE}] ${VENDOR_TITLE} ${skipTest}`, () => {
         const ctx = {
           ...BASE_CTX,
           email: `${uuid()}@example.com`,
           walletVendor: walletVendor.meta.name,
           issuerVendor: issuerVendor.meta.name,
           verifierVendor: verifierVendor.meta.name,
+          did: TEST_PROFILE.did,
+          profile: TEST_PROFILE.issuerProfile,
+          skipStatusCheck: TEST_PROFILE.skipVCStatusCheck,
         };
 
         // runs once before the first test in this block
         before(async () => {
           await browser.reloadSession();
           await browser.maximizeWindow();
+        });
+
+        beforeEach(function() {
+          if(skipTest) {
+            this.skip();
+          }
         });
 
         it('creates a wallet', async function() {
@@ -69,7 +91,7 @@ walletVendors.forEach(walletVendor => {
           // 2. Authenticate at Issuer Website with Wallet
           await issuerVendor.issuer.api.authenticate(ctx);
           await chapi.chooseWallet({
-            name: walletVendor.wallet.meta.name
+            name: walletVendor.wallet.meta.name,
           });
           await walletVendor.wallet.api.authenticate(ctx);
           await browser.switchToFrame(null);
@@ -79,7 +101,7 @@ walletVendors.forEach(walletVendor => {
 
           // 4. Store credential with Wallet
           await chapi.chooseWallet({
-            name: walletVendor.wallet.meta.name
+            name: walletVendor.wallet.meta.name,
           });
           await walletVendor.wallet.api.storeCredentials(ctx);
           await browser.switchToFrame(null);
@@ -96,7 +118,7 @@ walletVendors.forEach(walletVendor => {
           // 2. Verify credentials at Verifier Website with Wallet
           await verifierVendor.verifier.api.verify(ctx);
           await chapi.chooseWallet({
-            name: walletVendor.wallet.meta.name
+            name: walletVendor.wallet.meta.name,
           });
           await walletVendor.wallet.api.presentCredentials(ctx);
           await browser.switchToFrame(null);
