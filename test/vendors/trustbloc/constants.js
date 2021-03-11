@@ -28,11 +28,12 @@ constants.dids = {
 
 constants.urls = new Map();
 
-// change below URLs to use different environment
-const WALLET_NAME = 'myagent.trustbloc.local'
-const WALLET_URL = 'https://myagent.trustbloc.local/';
-const ISSUER_URL = 'https://issuer.trustbloc.local/';
-const VERIFIER_URL = 'https://rp.trustbloc.local/';
+// const WALLET_NAME = 'agent.sandbox.trustbloc.dev'
+const WALLET_NAME = 'agent-ui.dev.trustbloc.dev'
+const WALLET_URL = 'https://agent-ui.dev.trustbloc.dev';
+const ISSUER_URL = 'https://demo-issuer.dev.trustbloc.dev';
+const VERIFIER_URL = 'https://demo-verifier.dev.trustbloc.dev';
+
 
 constants.urls.set('2020-05-07-dhs-prc', {
   wallet: WALLET_URL,
