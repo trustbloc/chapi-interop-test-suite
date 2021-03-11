@@ -108,6 +108,11 @@ walletVendors.forEach(walletVendor => {
 
           // 5. Show success message at Issuer Website
           await issuerVendor.issuer.api.finish(ctx);
+
+          // wait for any async operations to complete
+          browser.executeAsync((done) => {
+            setTimeout(done, 10000)
+          })
         });
 
         it('verifies a CMTR credential', async () => {
