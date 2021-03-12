@@ -29,10 +29,10 @@ constants.dids = {
 constants.urls = new Map();
 
 // const WALLET_NAME = 'agent.sandbox.trustbloc.dev'
-const WALLET_NAME = 'agent-ui.dev.trustbloc.dev'
-const WALLET_URL = 'https://agent-ui.dev.trustbloc.dev';
-const ISSUER_URL = 'https://demo-issuer.dev.trustbloc.dev';
-const VERIFIER_URL = 'https://demo-verifier.dev.trustbloc.dev';
+const WALLET_NAME = 'agent.sandbox.trustbloc.dev'
+const WALLET_URL = 'https://agent.sandbox.trustbloc.dev/';
+const ISSUER_URL = 'https://demo-issuer.sandbox.trustbloc.dev/';
+const VERIFIER_URL = 'https://demo-verifier.sandbox.trustbloc.dev/';
 
 
 constants.urls.set('2020-05-07-dhs-prc', {
