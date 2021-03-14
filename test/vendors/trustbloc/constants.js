@@ -11,9 +11,9 @@ constants.dids = {
   },
   key: {
     name: 'DID_KEY',
-    did: 'did:key:z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd',
-    pkjwk: '{"kty": "OKP","d": "B6LAGGr-fqK1xb8dS_M4TBEJr2U-X1PPwhGjPkiZofE","crv": "Ed25519","x": "AgQMioVk8C3VhcSnK7bwOjwu5eiyEe3nMaDSkNt2H70","kid":"z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd"}',
-    keyID: 'did:key:z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd#z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd',
+    did: 'did:key:z6MknbvvxApNNLmhZV8JZXsoXcppnaF2dgG4bqN5Xi74Pisq',
+    pkjwk: '{ "kty": "OKP", "d": "q6-Z0JFBQZRBoFwyAcpWolHZPWgmvi3VcyPXggwO2lo", "crv": "Ed25519", "x": "eRYcIeukCnDTrRXa6qgYoQpTfmcZqZzoDMznqDir7-g", "kid": "z6MknbvvxApNNLmhZV8JZXsoXcppnaF2dgG4bqN5Xi74Pisq"}',
+    keyID: 'did:key:z6MknbvvxApNNLmhZV8JZXsoXcppnaF2dgG4bqN5Xi74Pisq#z6MknbvvxApNNLmhZV8JZXsoXcppnaF2dgG4bqN5Xi74Pisq',
     signatureType: 'Ed25519Signature2018'
   },
   v1: {
@@ -24,6 +24,7 @@ constants.dids = {
     signatureType: 'Ed25519Signature2018'
   }
 };
+
 
 
 constants.urls = new Map();
